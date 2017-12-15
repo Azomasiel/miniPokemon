@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
+using System.Collections;
+using UnityEngine;
 
 namespace miniPokemon
 {

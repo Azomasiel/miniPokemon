@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Collections;
+using UnityEngine;
 
 namespace miniPokemon
 {
@@ -11,6 +13,8 @@ namespace miniPokemon
         private int level;
         private bool isKO;
         private int life;
+
+        public Attack[] attackList;
 
 
         public int Life
