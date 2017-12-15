@@ -5,9 +5,9 @@ using miniPokemon;
 
 public class Attack : MonoBehaviour
 {
-    protected float ratio;
+     public float ratio;
 
-    public virtual void Animation()
+    public virtual void Animation(GameObject attacker, GameObject defender)
     {
     }
 

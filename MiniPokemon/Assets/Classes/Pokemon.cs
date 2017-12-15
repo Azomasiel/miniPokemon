@@ -8,6 +8,9 @@ namespace miniPokemon
 {
     public class Pokemon : Animal
     {
+        public GameObject pokemon;
+        public GameObject opponent;
+
         private Poketype poketype;
         private int damage;
         private int level;
@@ -39,8 +42,14 @@ namespace miniPokemon
             ELECTRICK
         };
 
+        protected void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                attackList[0].Animation(pokemon, pokemon);
+            }
+        }
 
-        
         public Pokemon(string name, int life, int damage, Poketype poketype)
         : base(name)
         {

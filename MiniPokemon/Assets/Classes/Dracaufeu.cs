@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using miniPokemon;
 
-public class Pikachu : Pokemon
-{
-    public Pikachu():base("Pikachu", 100, 70, Poketype.ELECTRICK)
+public class Dracaufeu : Pokemon {
+    public Dracaufeu():base("Dracaufeu", 100, 80, Poketype.FIRE)
     {
+
     }
 }

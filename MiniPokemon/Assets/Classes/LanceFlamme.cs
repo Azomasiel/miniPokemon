@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using miniPokemon;
 
-public class TranchHerb : Attack
-{
+public class LanceFlamme : Attack {
     public GameObject animator;
 
-    public TranchHerb():base(0.5f)
+    public LanceFlamme():base(0.7f)
     {
     }
 
