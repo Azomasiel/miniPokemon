@@ -10,17 +10,21 @@ namespace miniPokemon
     {
         public GameObject pokemon;
         public GameObject opponent;
+        public static Pokemon dracaufeu = new Pokemon("Dracaufeu", 100, 80, Poketype.FIRE);
+        public static Pokemon pikachu = new Pokemon("Pikachu", 100, 70, Poketype.ELECTRICK);
+
+        public static Pokemon[] allPokemonList = new Pokemon[] { dracaufeu, pikachu};
 
         private Poketype poketype;
-        private int damage;
+        public float damage;
         private int level;
         private bool isKO;
-        private int life;
+        public float life;
 
         public Attack[] attackList;
 
 
-        public int Life
+        public float Life
         {
             get { return life; }
             set { life = value; }
@@ -46,7 +50,7 @@ namespace miniPokemon
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                attackList[0].Animation(pokemon, pokemon);
+                attackList[0].Animation(0, 0);
             }
         }
 
@@ -77,7 +81,7 @@ namespace miniPokemon
             level++;
         }
 
-        public int Attack()
+        public float Attack()
         {
             return damage;
         }

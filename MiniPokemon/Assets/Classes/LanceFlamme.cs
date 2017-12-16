@@ -11,7 +11,7 @@ public class LanceFlamme : Attack {
     }
 
 
-    public override void Animation(GameObject attacker, GameObject defender)
+    public override void Animation(int attacker, int defender)
     {
         animator.SetActive(true);
     }

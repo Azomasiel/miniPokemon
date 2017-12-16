@@ -12,13 +12,14 @@ namespace miniPokemon
 
         private int age;
 
+        
+
         public int Age
         {
             get { return age; }
             set { age = value; }
         }
-             
-        private List<Pokemon> listPokemon;
+        public List<Pokemon> listPokemon;
         
 
         public Trainer(string name, int age)
@@ -61,6 +62,12 @@ namespace miniPokemon
         public void CatchAPokemon(Pokemon pokemon)
         {
             listPokemon.Add(pokemon);
+        }
+
+
+        public void AddPokemon (int index)
+        {
+            listPokemon.Add(Pokemon.allPokemonList[index]);
         }
         
     }
