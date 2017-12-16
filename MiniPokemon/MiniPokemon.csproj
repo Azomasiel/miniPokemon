@@ -223,11 +223,12 @@
     <Compile Include="Assets\Classes\Attack.cs" />
     <Compile Include="Assets\Classes\Dracaufeu.cs" />
     <Compile Include="Assets\Classes\GetPokemon.cs" />
-    <Compile Include="Assets\Classes\GlobalControl.cs" />
     <Compile Include="Assets\Classes\LanceFlamme.cs" />
     <Compile Include="Assets\Classes\MainMenu.cs" />
     <Compile Include="Assets\Classes\Pikachu.cs" />
     <Compile Include="Assets\Classes\Pokemon.cs" />
+    <Compile Include="Assets\Classes\Rotater.cs" />
+    <Compile Include="Assets\Classes\Tracer.cs" />
     <Compile Include="Assets\Classes\Trainer.cs" />
     <Compile Include="Assets\Classes\TranchHerb.cs" />
   </ItemGroup>
