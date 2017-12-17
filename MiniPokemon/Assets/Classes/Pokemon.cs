@@ -44,6 +44,7 @@ namespace miniPokemon
 
         protected void Update()
         {
+
             if (isKO)
             {
                 Destroy(gameObject);

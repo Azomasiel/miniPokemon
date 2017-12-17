@@ -19,6 +19,8 @@ public class Game : MonoBehaviour {
     private GameObject pika;
     private GameObject sala;
 
+    public Attack[] attackList;
+
 	public void GameInit() {
 
         Debug.Log("Game started");
@@ -29,15 +31,15 @@ public class Game : MonoBehaviour {
         {
             if (pokemon.damage == Pokemon.pikachu.damage)
             {
-                pika = Instantiate(pikachuGO, new Vector3(0, 0, 2), Quaternion.Euler(new Vector3(0, 180, 0))) as GameObject;
-                sala = Instantiate(salamecheGO, new Vector3(0, 0, -2), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+                pika = Instantiate(pikachuGO, new Vector3(0, 0, 10), Quaternion.Euler(new Vector3(0, 180, 0))) as GameObject;
+                sala = Instantiate(salamecheGO, new Vector3(0, 0, -10), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
                 pokeTrainer = Pokemon.pikachu;
                 pokeOppo = Pokemon.dracaufeu;
             }
             else
             {
-                sala = Instantiate(salamecheGO, new Vector3(0, 0, 2), Quaternion.Euler(new Vector3(0, 180, 0)));
-                pika = Instantiate(pikachuGO, new Vector3(0, 0, -2), Quaternion.Euler(new Vector3(0, 0, 0)));
+                sala = Instantiate(salamecheGO, new Vector3(0, 0, 10), Quaternion.Euler(new Vector3(0, 180, 0)));
+                pika = Instantiate(pikachuGO, new Vector3(0, 0, -10), Quaternion.Euler(new Vector3(0, 0, 0)));
                 pokeTrainer = Pokemon.dracaufeu;
                 pokeOppo = Pokemon.pikachu;
             }
@@ -48,6 +50,6 @@ public class Game : MonoBehaviour {
 
     public void GameLaunched()
     {
-
+        attackList[0].Animation(sala, true);
     }
 }

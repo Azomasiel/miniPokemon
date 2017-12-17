@@ -6,13 +6,10 @@ using miniPokemon;
 public class Attack : MonoBehaviour
 {
     public float ratio;
-    [SerializeField]
-    private Trainer trainer;
-    [SerializeField]
-    private Trainer opponent;
 
 
-    public virtual void Animation(int attacker, int defender)
+
+    public virtual void Animation(GameObject pokemon, bool isPlayer)
     {
 
     }
