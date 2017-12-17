@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 965f5723035c08e40a313ada3ebf05df
+timeCreated: 1513537320
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - trainer: {instanceID: 0}
+  - opponent: {instanceID: 0}
+  - pikachuGO: {fileID: 1240564159470138, guid: a6934db26e7849841b93fee62ca25eb6,
+      type: 2}
+  - salamecheGO: {fileID: 1552169210012940, guid: f057f25e41c02fd409fe83bf485b1eb1,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

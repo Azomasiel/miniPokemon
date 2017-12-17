@@ -8,19 +8,16 @@ namespace miniPokemon
 {
     public class Pokemon : Animal
     {
-        public GameObject pokemon;
-        public Trainer opponent;
-        public static Pokemon dracaufeu = new Pokemon(100, 80, Poketype.FIRE);
-        public static Pokemon pikachu = new Pokemon(100, 70, Poketype.ELECTRICK);
+        public static Pokemon dracaufeu = new Pokemon(100, 40, Poketype.FIRE);
+        public static Pokemon pikachu = new Pokemon(100, 30, Poketype.ELECTRICK);
 
-        public static Pokemon[] allPokemonList = new Pokemon[] { dracaufeu, pikachu};
-
+        public static Pokemon[] allPokemonList = new Pokemon[] { pikachu, dracaufeu};
+        
         private Poketype poketype;
         public float damage;
         private bool isKO;
         public float life;
-
-        public Attack[] attackList;
+        
 
 
         public float Life
@@ -47,11 +44,6 @@ namespace miniPokemon
 
         protected void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                Attack(0, 0);
-            }
-
             if (isKO)
             {
                 Destroy(gameObject);
@@ -66,22 +58,9 @@ namespace miniPokemon
             isKO = false;
         }
 
-
-        public void Attack(int attack, int defender)
-        {
-            opponent.listPokemon[defender].GetHurt(damage * attackList[attack].ratio);
-            attackList[attack].Animation(0, defender);
-        }
-
         public void GetHurt(float damage)
         {
             life -= damage;
-            IsKO = life <= 0;
-        }
-
-        public void Heal(int life)
-        {
-            this.life += life;
             IsKO = life <= 0;
         }
     }
