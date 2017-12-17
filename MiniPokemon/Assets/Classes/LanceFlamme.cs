@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using miniPokemon;
 
-public class LanceFlamme : Attack {
+public class LanceFlamme : Attack
+{
     public GameObject animator;
 
     public LanceFlamme():base(0.7f)

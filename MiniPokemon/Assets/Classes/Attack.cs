@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
 
     public virtual void Animation(int attacker, int defender)
     {
-        opponent.listPokemon[defender].life -= trainer.listPokemon[attacker].damage * ratio;
+
     }
 
     public Attack(float ratio)

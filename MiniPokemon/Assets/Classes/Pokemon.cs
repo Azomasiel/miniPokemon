@@ -9,15 +9,14 @@ namespace miniPokemon
     public class Pokemon : Animal
     {
         public GameObject pokemon;
-        public GameObject opponent;
-        public static Pokemon dracaufeu = new Pokemon("Dracaufeu", 100, 80, Poketype.FIRE);
-        public static Pokemon pikachu = new Pokemon("Pikachu", 100, 70, Poketype.ELECTRICK);
+        public Trainer opponent;
+        public static Pokemon dracaufeu = new Pokemon(100, 80, Poketype.FIRE);
+        public static Pokemon pikachu = new Pokemon(100, 70, Poketype.ELECTRICK);
 
         public static Pokemon[] allPokemonList = new Pokemon[] { dracaufeu, pikachu};
 
         private Poketype poketype;
         public float damage;
-        private int level;
         private bool isKO;
         public float life;
 
@@ -50,43 +49,31 @@ namespace miniPokemon
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                attackList[0].Animation(0, 0);
+                Attack(0, 0);
+            }
+
+            if (isKO)
+            {
+                Destroy(gameObject);
             }
         }
 
-        public Pokemon(string name, int life, int damage, Poketype poketype)
-        : base(name)
+        public Pokemon(int life, int damage, Poketype poketype)
         {
             this.damage = damage;
             this.life = life;
             this.poketype = poketype;
-            level = 1;
             isKO = false;
         }
-        
 
-        
-        public override void WhoAmI()
+
+        public void Attack(int attack, int defender)
         {
-            Console.WriteLine("I'm a Pokemon");
+            opponent.listPokemon[defender].GetHurt(damage * attackList[attack].ratio);
+            attackList[attack].Animation(0, defender);
         }
 
-        public override void Describe()
-        {
-            Console.WriteLine("My name is " + Name + " I'm a Pokemon of type " + poketype + " and I'm level " + level);
-        }
-        
-        public void LevelUp()
-        {
-            level++;
-        }
-
-        public float Attack()
-        {
-            return damage;
-        }
-
-        public void GetHurt(int damage)
+        public void GetHurt(float damage)
         {
             life -= damage;
             IsKO = life <= 0;

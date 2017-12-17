@@ -221,11 +221,9 @@
   <ItemGroup>
     <Compile Include="Assets\Classes\Animal.cs" />
     <Compile Include="Assets\Classes\Attack.cs" />
-    <Compile Include="Assets\Classes\Dracaufeu.cs" />
     <Compile Include="Assets\Classes\GetPokemon.cs" />
     <Compile Include="Assets\Classes\LanceFlamme.cs" />
     <Compile Include="Assets\Classes\MainMenu.cs" />
-    <Compile Include="Assets\Classes\Pikachu.cs" />
     <Compile Include="Assets\Classes\Pokemon.cs" />
     <Compile Include="Assets\Classes\Rotater.cs" />
     <Compile Include="Assets\Classes\Tracer.cs" />

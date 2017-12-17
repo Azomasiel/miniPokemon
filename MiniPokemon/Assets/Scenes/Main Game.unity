@@ -778,12 +778,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 344655656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5282b4a3db91b64bb24d4d3d0d099ce, type: 3}
+  m_Script: {fileID: 11500000, guid: cda1959ab198f8e4799c18ecee802a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pokemon: {fileID: 344655656}
-  opponent: {fileID: 2119546976}
-  damage: 80
+  opponent: {fileID: 1409520750}
+  damage: 70
   life: 100
   attackList:
   - {fileID: 583995096}
@@ -3415,12 +3415,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119546976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4a4ea1852bf714fa98a0d6562f9776, type: 3}
+  m_Script: {fileID: 11500000, guid: cda1959ab198f8e4799c18ecee802a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pokemon: {fileID: 2119546976}
-  opponent: {fileID: 344655656}
-  damage: 70
+  opponent: {fileID: 329314386}
+  damage: 60
   life: 100
   attackList:
   - {fileID: 1163788048}
