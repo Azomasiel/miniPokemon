@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
     public bool gameStarted = false;
+    private int step = 0;
+    private bool stepped = false;
 
     public Trainer trainer;
     public Trainer opponent;
@@ -71,8 +73,6 @@ public class Game : MonoBehaviour {
                 isPika = false;
             }
         }
-
-        GameLaunched();
     }
 
     public static Text AddTextToCanvas(string textString, GameObject canvasGameObject)
@@ -100,57 +100,67 @@ public class Game : MonoBehaviour {
         return tempTextBox;
     }
 
-    public void GameLaunched()
+    public void Update()
     {
-        while (pokeOppo.life > 0 && pokeTrainer.life > 0)
+        if (gameStarted && pokeOppo.life > 0 && pokeTrainer.life > 0)
         {
-            
-            displayTurn = "Turn: " + frame;
-            position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
-            turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
-
-            displayAnnounceMessage = announcementMessages[frame % nbMessages];
-            position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
-            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
-
-            position = new Vector3(canvas0Width + 10, canvas0Height + 210, 0);
-            if (isPika)
-                attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
-            else
-                attackText = AddText("[A] - Lance-Flamme", fontSize, canvas, textPrefab, position);
-
-            while (!Input.GetKeyDown(KeyCode.A)) { }
-
-            if (isPika)
+            if (step == 0 && !stepped)
             {
-                TranchHerb.Animation(true);
-                pokeOppo.GetHurt(pokeTrainer.damage * TranchHerb.ratio);
-                pokeTrainer.GetHurt(pokeOppo.damage * LanceFlamme.ratio);
+                displayTurn = "Turn: " + frame;
+                position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
+                turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
+
+                displayAnnounceMessage = announcementMessages[frame % nbMessages];
+                position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
+                announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+
+                position = new Vector3(canvas0Width + 10, canvas0Height + 210, 0);
+                if (isPika)
+                    attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
+                else
+                    attackText = AddText("[A] - Lance-Flamme", fontSize, canvas, textPrefab, position);
+                stepped = true;
             }
-            else
+            if (Input.GetKeyDown(KeyCode.A) && step == 0)
             {
-                LanceFlamme.Animation(true);
-                pokeOppo.GetHurt(pokeTrainer.damage * LanceFlamme.ratio);
-                pokeTrainer.GetHurt(pokeOppo.damage * TranchHerb.ratio);
+                stepped = false;
+                step = 1;
+
+                if (isPika)
+                {
+                    TranchHerb.Animation(true);
+                    pokeOppo.GetHurt(pokeTrainer.damage * TranchHerb.ratio);
+                    pokeTrainer.GetHurt(pokeOppo.damage * LanceFlamme.ratio);
+                }
+                else
+                {
+                    LanceFlamme.Animation(true);
+                    pokeOppo.GetHurt(pokeTrainer.damage * LanceFlamme.ratio);
+                    pokeTrainer.GetHurt(pokeOppo.damage * TranchHerb.ratio);
+                }
+
+                DestroyObject(turnText);
+                DestroyObject(announceText);
+                DestroyObject(attackText);
+
+                displayTurn = "L'adversaire vous attaque !";
+                position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
+                turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
+
+                displayAnnounceMessage = "Appuyer sur entrée pour continuer";
+                position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
+                announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+                frame++;
             }
+
+            if (!Input.GetKeyDown(KeyCode.Return) && step == 1) {
+                stepped = false;
+                step = 0;
+                DestroyObject(turnText);
+                DestroyObject(announceText);
+            }
+
             
-            DestroyObject(turnText);
-            DestroyObject(announceText);
-            DestroyObject(attackText);
-
-            displayTurn = "L'adversaire vous attaque !";
-            position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
-            turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
-
-            displayAnnounceMessage = "Appuyer sur entrée pour continuer";
-            position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
-            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
-
-            while (!Input.GetKeyDown(KeyCode.Return)) {}
-
-            DestroyObject(turnText);
-            DestroyObject(announceText);
-            frame++;
         }
     }
 }
