@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using miniPokemon;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Game : MonoBehaviour {
@@ -37,11 +38,10 @@ public class Game : MonoBehaviour {
 
     private GameObject pika; //instance
     private GameObject sala; //instance
-
-    private string turnDisplay;
-    string displayTurn;
-    private string chooseAttackDisplay;
-    private string stateDisplay;
+    
+    private string displayTurn;
+    //private string chooseAttackDisplay;
+    //private string stateDisplay;
 
     /*private static int screenHeight = Screen.height;
     private static int screenWidth = Screen.width;
@@ -52,14 +52,14 @@ public class Game : MonoBehaviour {
     public Text text2;
     public Text text3;
 
-    public GameObject canvas; //Prefab!
-    public int fontSize;
-    public Text textPrefab;
-    static Color textColor = Color.white;
+    //public GameObject canvas; //Prefab!
+    //public int fontSize;
+    //public Text textPrefab;
+    //static Color textColor = Color.white;
 
-    Text attackText;
-    Text turnText;
-    Text announceText;
+    //Text attackText;
+    //Text turnText;
+    //Text announceText;
 
     System.Random random = new System.Random();
     float ratioRandom;
@@ -116,7 +116,7 @@ public class Game : MonoBehaviour {
         {
             if (step == 0 && !stepped)
             {
-                displayTurn = "Tour n° " + frame + " !";
+                displayTurn = "Tour n° " + frame + " ! --- Votre vie : " + (int)pokeTrainer.life + " --- Vie de l'adversaire : " + (int)pokeOppo.life;
                 /*position = new Vector3(canvas0Width, canvas0Height, 0);
                 turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);*/
                 text1.text = displayTurn;
@@ -130,7 +130,7 @@ public class Game : MonoBehaviour {
                 if (isPika)
                 {
                     //attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
-                    text3.text = "[A] - Noeud'Herbe";
+                    text3.text = "[A] - Tranch'Herbe";
                 }
                 else
                 {
@@ -206,19 +206,21 @@ public class Game : MonoBehaviour {
 
         if (pokeOppo.life <= 0 && !endWritten)
         {
-            displayAnnounceMessage = "BRAVO VOUS AVEZ TERRASSE L'ENNEMI!";
+            /*displayAnnounceMessage = "BRAVO VOUS AVEZ TERRASSE L'ENNEMI!";
             //position = new Vector3(canvas0Width, canvas0Height, 0);
             //announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
             text2.text = displayAnnounceMessage;
-            endWritten = true;
+            endWritten = true;*/
+            SceneManager.LoadScene("Win");
         }
         else if (pokeTrainer.life <= 0 && !endWritten)
         {
-            displayAnnounceMessage = "Bravo, vous redoublez votre semestre!";
+            /*displayAnnounceMessage = "Bravo, vous redoublez votre semestre!";
             //position = new Vector3(canvas0Width, canvas0Height - 50, 0);
             //announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
             text2.text = displayAnnounceMessage;
-            endWritten = true;
+            endWritten = true;*/
+            SceneManager.LoadScene("Lose");
         }
     }
 }
