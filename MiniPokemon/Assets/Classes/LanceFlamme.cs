@@ -5,14 +5,16 @@ using miniPokemon;
 
 public class LanceFlamme : Attack
 {
-    public GameObject animator;
+    public static float ratio;
+    public static GameObject animator;
+    private static GameObject instance;
 
     public LanceFlamme():base(0.7f)
     {
     }
 
 
-    public override void Animation(GameObject pokemon, bool isPlayer)
+    public static void Animation(bool isPlayer)
     {
         Vector3 position;
         Quaternion rotation;
@@ -20,14 +22,13 @@ public class LanceFlamme : Attack
         {
             position = new Vector3(0, 0, 5);
             rotation = Quaternion.Euler(0, 180, 0);
-
         }
         else
         {
             position = new Vector3(0, 0, -5);
             rotation = Quaternion.Euler(0, 0, 0);
         }
-        Instantiate(gameObject, position, rotation);
-        DestroyObject(gameObject, 3);
+        instance = Instantiate(animator, position, rotation);
+        DestroyObject(instance, 3);
     }
 }

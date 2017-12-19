@@ -7,12 +7,9 @@ namespace miniPokemon
 {
     public class Animal : MonoBehaviour
     {
-
-
         public Animal()
         {
 
         }
-
     }
 }

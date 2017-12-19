@@ -5,17 +5,8 @@ using miniPokemon;
 
 public class Attack : MonoBehaviour
 {
-    public float ratio;
-
-
-
-    public virtual void Animation(GameObject pokemon, bool isPlayer)
-    {
-
-    }
-
     public Attack(float ratio)
     {
-        this.ratio = ratio;
+        
     }
 }
