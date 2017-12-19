@@ -43,10 +43,14 @@ public class Game : MonoBehaviour {
     private string chooseAttackDisplay;
     private string stateDisplay;
 
-    private static int screenHeight = Screen.height;
+    /*private static int screenHeight = Screen.height;
     private static int screenWidth = Screen.width;
     private static int canvas0Height = -300;
-    private static int canvas0Width = 200;
+    private static int canvas0Width = 200;*/
+
+    public Text text1;
+    public Text text2;
+    public Text text3;
 
     public GameObject canvas; //Prefab!
     public int fontSize;
@@ -90,8 +94,8 @@ public class Game : MonoBehaviour {
             }
         }
     }
-
-    public static Text AddText(string textToDisplay, int fontSize, GameObject canvas, Text textPrefab, Vector3 position)
+    
+    /*public static Text AddText(string textToDisplay, int fontSize, GameObject canvas, Text textPrefab, Vector3 position)
     {
         Text tempTextBox = Instantiate(textPrefab, position, Quaternion.identity) as Text;
         //Parent to the panel
@@ -102,7 +106,7 @@ public class Game : MonoBehaviour {
         tempTextBox.text = textToDisplay;
         tempTextBox.color = Game.textColor;
         return tempTextBox;
-    }
+    }*/
 
     public void Update()
     {
@@ -112,19 +116,27 @@ public class Game : MonoBehaviour {
         {
             if (step == 0 && !stepped)
             {
-                displayTurn = "Turn: " + frame;
-                position = new Vector3(canvas0Width, canvas0Height, 0);
-                turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
+                displayTurn = "Tour n° " + frame + " !";
+                /*position = new Vector3(canvas0Width, canvas0Height, 0);
+                turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);*/
+                text1.text = displayTurn;
 
                 displayAnnounceMessage = announcementMessages[frame % nbMessages];
-                position = new Vector3(canvas0Width, canvas0Height - 50, 0);
-                announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+                /*position = new Vector3(canvas0Width, canvas0Height - 50, 0);
+                announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);*/
+                text2.text = displayAnnounceMessage;
 
-                position = new Vector3(canvas0Width, canvas0Height - 100, 0);
+                //position = new Vector3(canvas0Width, canvas0Height - 100, 0);
                 if (isPika)
-                    attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
+                {
+                    //attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
+                    text3.text = "[A] - Noeud'Herbe";
+                }
                 else
-                    attackText = AddText("[A] - Lance-Flamme", fontSize, canvas, textPrefab, position);
+                {
+                    //attackText = AddText("[A] - Lance-Flamme", fontSize, canvas, textPrefab, position);
+                    text3.text = "[A] - Lance-Flamme";
+                }
                 stepped = true;
             }
             if (Input.GetKeyDown(KeyCode.A) && step == 0)
@@ -145,29 +157,37 @@ public class Game : MonoBehaviour {
                     pokeOppo.GetHurt((pokeTrainer.damage * LanceFlamme.ratio) / ratioRandom);
                 }
 
-                DestroyObject(turnText);
+                text1.text = "";
+                text2.text = "";
+                text3.text = "";
+                /*DestroyObject(turnText);
                 DestroyObject(announceText);
-                DestroyObject(attackText);
+                DestroyObject(attackText);*/
                 if (pokeOppo.life > 0)
                 {
                     displayTurn = "L'adversaire vous attaque !";
-                    position = new Vector3(canvas0Width, canvas0Height, 0);
-                    turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
+                    //position = new Vector3(canvas0Width, canvas0Height, 0);
+                    //turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
+                    text1.text = displayTurn;
 
                     displayAnnounceMessage = "Appuyer sur Entrée pour continuer";
-                    position = new Vector3(canvas0Width, canvas0Height -50, 0);
-                    announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+                    //position = new Vector3(canvas0Width, canvas0Height -50, 0);
+                    //announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+                    text2.text = displayAnnounceMessage;
+
                     frame++;
                 }
-                Debug.Log(pokeTrainer.life);
-                Debug.Log(pokeOppo.life);
+                //Debug.Log(pokeTrainer.life);
+                //Debug.Log(pokeOppo.life);
             }
 
             if (Input.GetKeyDown(KeyCode.Return) && step == 1) {
                 stepped = false;
                 step = 0;
-                DestroyObject(turnText);
-                DestroyObject(announceText);
+                text1.text = "";
+                text2.text = "";
+                //DestroyObject(turnText);
+                //DestroyObject(announceText);
                 if (isPika)
                 {
                     ratioRandom = random.Next(2, 4);
@@ -187,15 +207,17 @@ public class Game : MonoBehaviour {
         if (pokeOppo.life <= 0 && !endWritten)
         {
             displayAnnounceMessage = "BRAVO VOUS AVEZ TERRASSE L'ENNEMI!";
-            position = new Vector3(canvas0Width, canvas0Height, 0);
-            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            //position = new Vector3(canvas0Width, canvas0Height, 0);
+            //announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            text2.text = displayAnnounceMessage;
             endWritten = true;
         }
         else if (pokeTrainer.life <= 0 && !endWritten)
         {
             displayAnnounceMessage = "Bravo, vous redoublez votre semestre!";
-            position = new Vector3(canvas0Width, canvas0Height - 50, 0);
-            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            //position = new Vector3(canvas0Width, canvas0Height - 50, 0);
+            //announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            text2.text = displayAnnounceMessage;
             endWritten = true;
         }
     }
