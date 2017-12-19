@@ -5,16 +5,15 @@ using miniPokemon;
 
 public class TranchHerb : Attack
 {
-    public static float ratio;
-    public static GameObject animator;
-    private static GameObject instance;
+    public static float ratio = 0.7f;
+    public GameObject animator;
 
-    public TranchHerb():base(0.5f)
+    public TranchHerb()
     {
     }
 
 
-    public static void Animation(bool isPlayer)
+    public void Animation(bool isPlayer)
     {
         Vector3 position;
         Quaternion rotation;
@@ -28,7 +27,7 @@ public class TranchHerb : Attack
             position = new Vector3(0, 0, -5);
             rotation = Quaternion.Euler(0, 0, 0);
         }
-        instance = Instantiate(animator, position, rotation);
+        GameObject instance = Instantiate(animator, position, rotation);
         DestroyObject(instance, 3);
     }
 }

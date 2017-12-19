@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using miniPokemon;
 
-public class LanceFlamme : Attack
+public class LanceFlamme : MonoBehaviour
 {
-    public static float ratio;
-    public static GameObject animator;
-    private static GameObject instance;
+    public static float ratio = 0.5f;
+    [SerializeField]
+    public GameObject animator;
 
-    public LanceFlamme():base(0.7f)
+    /*public LanceFlamme()
     {
-    }
+    }*/
 
 
-    public static void Animation(bool isPlayer)
+    public void Animation(bool isPlayer)
     {
         Vector3 position;
         Quaternion rotation;
@@ -28,7 +28,7 @@ public class LanceFlamme : Attack
             position = new Vector3(0, 0, -5);
             rotation = Quaternion.Euler(0, 0, 0);
         }
-        instance = Instantiate(animator, position, rotation);
+        GameObject instance = Instantiate(animator, position, rotation);
         DestroyObject(instance, 3);
     }
 }

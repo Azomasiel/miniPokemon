@@ -5,7 +5,7 @@ using miniPokemon;
 
 public class Attack : MonoBehaviour
 {
-    public Attack(float ratio)
+    public Attack()
     {
         
     }

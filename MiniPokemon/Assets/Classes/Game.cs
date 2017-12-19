@@ -6,8 +6,20 @@ using UnityEngine.UI;
 
 
 public class Game : MonoBehaviour {
+
+    /*[Range(-900, 900)]
+    public int x;
+    [Range(-600, 600)]
+    public int y;
+
+    Text debugText;
+    Vector3 positionDebug;*/
+
+
+
     public bool gameStarted = false;
     private int step = 0;
+    private bool endWritten = false;
     private bool stepped = false;
 
     public Trainer trainer;
@@ -17,13 +29,14 @@ public class Game : MonoBehaviour {
     private Pokemon pokeOppo; //Opponent's Pokemon
     bool isPika = true;
 
+    public LanceFlamme lanceFlamme;
+    public TranchHerb tranchHerb;
+
     public GameObject pikachuGO; //prefab
     public GameObject salamecheGO; //prefab
 
     private GameObject pika; //instance
     private GameObject sala; //instance
-
-    public Attack[] attackList;
 
     private string turnDisplay;
     string displayTurn;
@@ -32,8 +45,8 @@ public class Game : MonoBehaviour {
 
     private static int screenHeight = Screen.height;
     private static int screenWidth = Screen.width;
-    private static int canvas0Height = screenHeight - 300;
-    private static int canvas0Width = screenWidth/2 - 500;
+    private static int canvas0Height = -300;
+    private static int canvas0Width = 200;
 
     public GameObject canvas; //Prefab!
     public int fontSize;
@@ -43,6 +56,9 @@ public class Game : MonoBehaviour {
     Text attackText;
     Text turnText;
     Text announceText;
+
+    System.Random random = new System.Random();
+    float ratioRandom;
 
     private static List<string> announcementMessages = new List<string> {"Votre adversaire est un dur à cuir à cuire ! Il faut agir !", "Allez ! Il ne faut qu'un tour pour anéantir cet avdersaire de pacotille !", "Cet adversaire méprisable ne paie rien pour attendre, sa mort est imminente !" };
     private static int frame = 0;
@@ -75,18 +91,6 @@ public class Game : MonoBehaviour {
         }
     }
 
-    public static Text AddTextToCanvas(string textString, GameObject canvasGameObject)
-    {
-        Text text = canvasGameObject.AddComponent<Text>();
-        text.text = textString;
-        
-        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        text.font = ArialFont;
-        text.material = ArialFont.material;
-
-        return text;
-    }
-
     public static Text AddText(string textToDisplay, int fontSize, GameObject canvas, Text textPrefab, Vector3 position)
     {
         Text tempTextBox = Instantiate(textPrefab, position, Quaternion.identity) as Text;
@@ -102,19 +106,21 @@ public class Game : MonoBehaviour {
 
     public void Update()
     {
+        /*positionDebug = new Vector3(x, y, 0);
+        debugText = AddText("Debug", fontSize, canvas, textPrefab, positionDebug);*/
         if (gameStarted && pokeOppo.life > 0 && pokeTrainer.life > 0)
         {
             if (step == 0 && !stepped)
             {
                 displayTurn = "Turn: " + frame;
-                position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
+                position = new Vector3(canvas0Width, canvas0Height, 0);
                 turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
 
                 displayAnnounceMessage = announcementMessages[frame % nbMessages];
-                position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
+                position = new Vector3(canvas0Width, canvas0Height - 50, 0);
                 announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
 
-                position = new Vector3(canvas0Width + 10, canvas0Height + 210, 0);
+                position = new Vector3(canvas0Width, canvas0Height - 100, 0);
                 if (isPika)
                     attackText = AddText("[A] - Noeud'Herbe", fontSize, canvas, textPrefab, position);
                 else
@@ -128,39 +134,69 @@ public class Game : MonoBehaviour {
 
                 if (isPika)
                 {
-                    TranchHerb.Animation(true);
-                    pokeOppo.GetHurt(pokeTrainer.damage * TranchHerb.ratio);
-                    pokeTrainer.GetHurt(pokeOppo.damage * LanceFlamme.ratio);
+                    tranchHerb.Animation(true);
+                    ratioRandom = random.Next(2, 4);
+                    pokeOppo.GetHurt((pokeTrainer.damage * TranchHerb.ratio) / ratioRandom);
                 }
                 else
                 {
-                    LanceFlamme.Animation(true);
-                    pokeOppo.GetHurt(pokeTrainer.damage * LanceFlamme.ratio);
-                    pokeTrainer.GetHurt(pokeOppo.damage * TranchHerb.ratio);
+                    lanceFlamme.Animation(true);
+                    ratioRandom = random.Next(2, 4);
+                    pokeOppo.GetHurt((pokeTrainer.damage * LanceFlamme.ratio) / ratioRandom);
                 }
 
                 DestroyObject(turnText);
                 DestroyObject(announceText);
                 DestroyObject(attackText);
+                if (pokeOppo.life > 0)
+                {
+                    displayTurn = "L'adversaire vous attaque !";
+                    position = new Vector3(canvas0Width, canvas0Height, 0);
+                    turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
 
-                displayTurn = "L'adversaire vous attaque !";
-                position = new Vector3(canvas0Width + 10, canvas0Height + 10, 0);
-                turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
-
-                displayAnnounceMessage = "Appuyer sur entrée pour continuer";
-                position = new Vector3(canvas0Width + 10, canvas0Height + 110, 0);
-                announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
-                frame++;
+                    displayAnnounceMessage = "Appuyer sur Entrée pour continuer";
+                    position = new Vector3(canvas0Width, canvas0Height -50, 0);
+                    announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+                    frame++;
+                }
+                Debug.Log(pokeTrainer.life);
+                Debug.Log(pokeOppo.life);
             }
 
-            if (!Input.GetKeyDown(KeyCode.Return) && step == 1) {
+            if (Input.GetKeyDown(KeyCode.Return) && step == 1) {
                 stepped = false;
                 step = 0;
                 DestroyObject(turnText);
                 DestroyObject(announceText);
+                if (isPika)
+                {
+                    ratioRandom = random.Next(2, 4);
+                    pokeTrainer.GetHurt((pokeOppo.damage * LanceFlamme.ratio) / ratioRandom);
+                    lanceFlamme.Animation(false);
+                }
+                else
+                {
+                    ratioRandom = random.Next(2, 4);
+                    pokeTrainer.GetHurt((pokeOppo.damage * TranchHerb.ratio) / ratioRandom);
+                    tranchHerb.Animation(false);
+                }
             }
+            //DestroyObject(debugText, 1);
+        }
 
-            
+        if (pokeOppo.life <= 0 && !endWritten)
+        {
+            displayAnnounceMessage = "BRAVO VOUS AVEZ TERRASSE L'ENNEMI!";
+            position = new Vector3(canvas0Width, canvas0Height, 0);
+            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            endWritten = true;
+        }
+        else if (pokeTrainer.life <= 0 && !endWritten)
+        {
+            displayAnnounceMessage = "Bravo, vous redoublez votre semestre!";
+            position = new Vector3(canvas0Width, canvas0Height - 50, 0);
+            announceText = AddText(displayAnnounceMessage, fontSize, canvas, textPrefab, position);
+            endWritten = true;
         }
     }
 }

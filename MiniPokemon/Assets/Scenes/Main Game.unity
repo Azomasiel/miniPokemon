@@ -2990,12 +2990,13 @@ MonoBehaviour:
   gameStarted: 0
   trainer: {fileID: 1409520750}
   opponent: {fileID: 329314386}
+  lanceFlamme: {fileID: 114171329456862576, guid: 3d5e1cfce17e39747b02567ed9799803,
+    type: 2}
+  tranchHerb: {fileID: 114870719049396070, guid: c9915011f8cec55469ec410adb369767,
+    type: 2}
   pikachuGO: {fileID: 1240564159470138, guid: a6934db26e7849841b93fee62ca25eb6, type: 2}
   salamecheGO: {fileID: 1552169210012940, guid: f057f25e41c02fd409fe83bf485b1eb1,
     type: 2}
-  attackList:
-  - {fileID: 114171329456862576, guid: 3d5e1cfce17e39747b02567ed9799803, type: 2}
-  - {fileID: 114870719049396070, guid: c9915011f8cec55469ec410adb369767, type: 2}
   canvas: {fileID: 966271010}
   fontSize: 15
   textPrefab: {fileID: 114369580782195518, guid: 9876ac17c68ecca45a3f0575d295ae7f,

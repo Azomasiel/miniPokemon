@@ -82,9 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3424005a8d9a334f94762f4498d585d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0.7
-  trainer: {fileID: 0}
-  opponent: {fileID: 0}
   animator: {fileID: 1071564778600044}
 --- !u!198 &198204705987368260
 ParticleSystem:
