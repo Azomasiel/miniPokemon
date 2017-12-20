@@ -165,7 +165,7 @@ public class Game : MonoBehaviour {
                 DestroyObject(attackText);*/
                 if (pokeOppo.life > 0)
                 {
-                    displayTurn = "L'adversaire vous attaque !";
+                    displayTurn = "L'adversaire est sur le point de vous attaquer !";
                     //position = new Vector3(canvas0Width, canvas0Height, 0);
                     //turnText = AddText(displayTurn, fontSize, canvas, textPrefab, position);
                     text1.text = displayTurn;
